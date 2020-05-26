@@ -1,0 +1,109 @@
+<style>
+  .greetings {
+    margin: 50px;
+    font-size: 21px;
+    font-family: cursive, arial, fantasy, times;
+    font-weight:bold;
+
+  }
+  .greetings .user {
+    color: seagreen;
+    font-size:25px;
+  }
+  .form {
+    display:none;
+    margin: 30px;
+    padding:10px;
+  }
+  .form1 {
+    display:none;
+    margin: 30px;
+    padding:10px;
+  }
+  .form-group input[type=text]{
+    width:25%;
+    margin-left: 15px;
+
+  }
+  .form-group button {
+    margin:15px;
+  }
+  .alert-info {
+    margin:20px;
+  }
+
+  .model {
+    display: none;
+    flex-wrap: wrap;
+    margin: 10px;
+    padding: 15px;
+
+  }
+
+  .models {
+    background-color: #F0FFFF;
+    box-shadow: 2px 3px black;
+    font-size: 20px;
+    margin: 10px;
+    padding: 20px;
+    width: 200px;
+</style>
+
+<script type="text/javascript" src="{{url_for('static', filename='script.js')}}"> </script>
+{% extends "layout.html" %}
+
+{% block profile %}
+  <div class="greetings">
+     Hello <span class="user">#{{username}}</span>
+  </div>
+{% endblock %}
+
+{% block button %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <button id="create" type="button" name="button">Create Channel</button>
+      </div>
+      <div class="col-sm">
+        <button id="join" type="button" name="button"> Join Channel</button>
+      </div>
+      <div class="col-sm">
+        <button id="change" type="button" name="button">Change Display name</button>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block channels %}
+  <div class="model">
+      {% for channel in channels %}
+        <div class="models">
+          <h6></h6>
+            <a class="channels" href="{{ url_for('enter_channel', channel = channel) }}"> {{ channel }} </a>
+        </div>
+      {% endfor %}
+  </div>
+{% endblock %}
+
+{% block form %}
+<div class="form">
+  <form class="form-group" id="form">
+    <input type="text" id="text" name="channel" required placeholder="Channel name" class="form-control" autocomplete="off">
+    <button id="createchannel" type="submit" name="button">Create</button>
+  </form>
+</div>
+
+<div id="result" class="alert-info" role="alert">
+</div>
+
+{% endblock %}
+
+{% block displayname %}
+<div class="form1">
+  <form class="form-group" id="form1" action="{{url_for('change')}}" method="post">
+    <input type="text" id="nameChange" name="nameChange" placeholder="Display name" required class="form-control" autocomplete="off">
+    <button type="submit" id="displayButton" name="button">Change name</button>
+  </form>
+</div>
+{% endblock %}
