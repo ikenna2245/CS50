@@ -2,11 +2,11 @@ import os
 import time
 from time import localtime, strftime
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash, send_from_directory, make_response
-from flask_socketio import SocketIO, emit, join_room, leave_room, send
+from flask_socketio import SocketIO, emit, join_room, leave_room
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = '/static/files'
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv', 'zip'}
+UPLOAD_FOLDER = "C:\\Users\Public\Pictures"
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv', 'zip', 'mp4', 'avi'}
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "SECRET_KEY"
@@ -14,7 +14,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 socketio = SocketIO(app)
 
 users = []
-channelsCreated = ["Lounge", "Coding", "Games", "CS50W"]
+channelsCreated = []
 channelMessages = {}
 timeStamp = strftime('%b-%d %I:%M%p', time.localtime())
 
@@ -91,6 +91,7 @@ def home ():
             channel = request.form.get('channel')
             if channel not in channelsCreated:
                 channelsCreated.append(channel)
+                channelMessages[channel]= []
                 return jsonify ({"success": True})
             else:
                 return jsonify ({"success":False})
@@ -108,34 +109,60 @@ def enter_channel (channel):
         session['channel'] = channel
         session ['currentChannel'] = True
         session.permanent = True
-        return render_template ('chat.html', channelid = channelName, userid = username, channels = channelsCreated)
+        room = session.get('channel')
+        return render_template ('chat.html', channelid = channelName, messages = channelMessages[room])
     else:
         return redirect ('/')
+
+@app.route ('/logout_channel')
+def logout_channel():
+    session ['currentChannel'] = False
+    session.pop ('channel', None)
+    session.pop ('currentChannel', None)
+    return redirect ('/home')
 
 @app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
         if file.filename == '':
-            return jsonify ({'filedetail':True, 'error':'No selected file'})
+            return jsonify ({'filedetail':True, 'error':'No selected file'}), 304
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            res = make_response(jsonify({"message": "File uploaded"}), 200)
+            link = "http://127.0.0.1:5000/download/" + filename
+            res = jsonify({"message": "File uploaded", "filename": filename, "link": link}), 200
             return res
     return redirect ('/')
 
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
+@app.route('/download/<filename>')
+def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
+                               filename, as_attachment = True)
 
 @socketio.on("submit message")
 def message (data):
     message = data['message']
     username = session ['username']
     room = session.get('channel')
-    emit ('announce message', {'message': message, 'username':username, 'time': timeStamp}, room=room, broadcast=True)
+    msg_data = {"username": username, "message":message, "time": strftime('%b-%d %I:%M%p', time.localtime())}
+    channelMessages[room].append(msg_data)
+    if len(channelMessages[room]) > 100:
+        channelMessages[room].pop(0)
+    emit ('announce message', {'message': message, 'username':username, 'time': strftime('%b-%d %I:%M%p', time.localtime())}, room=room, broadcast=True)
+
+@socketio.on ("file sent")
+def file_sent(data):
+    username = session ['username']
+    room = session.get('channel')
+    filename = data["filename"]
+    link = data["link"]
+    msg_data = {"username": username, "message":link, "time": strftime('%b-%d %I:%M%p', time.localtime()), "filename":filename}
+    channelMessages[room].append(msg_data)
+    if len(channelMessages[room]) > 100:
+        channelMessages[room].pop(0)
+    emit ('announce file', {'username':username, 'time': strftime('%b-%d %I:%M%p', time.localtime()), 'filename': filename, 'link': link}, room=room, broadcast = True)
+
 @socketio.on ("join")
 def on_join ():
     username = session.get('username')
