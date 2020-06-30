@@ -1,0 +1,332 @@
+{% extends 'users/base.html' %}
+{% load static %}
+{% block content %}
+  <div class="row no-gutters bg-light position-relative main">
+    <div class="col-md-6 mb-md-0 p-md-4">
+      <img src="{% static 'orders\pizzatable.jpg' %}" height="300" width="auto" class="w-100 img-fluid rounded" alt="Pizza Table">
+    </div>
+    <div class="col-md-6 position-static p-4 pl-md-5 text-center">
+      <h4 class="mt-0">Nick's Pizza Menu</h4>
+      <p>Pizza - Regular & Sicilian Style</p>
+      <p>Subs, Salads and Dinner platters</p>
+      <div class="mt-3">
+          Place Your Order Now!!!
+        <p class="text-center mt-2">Or</p>
+        007-348-8987
+      </div>
+    </div>
+  </div>
+  <div class="mt-2 mb-2 border-bottom border-top main">
+    <h4>Our Menu Item</h4>
+  </div>
+  <div class="d-flex justify-content-around main">
+    <div class="container">
+      <button type="button" class="btn btn-info" id="full_menu"> Menu </button>
+    </div>
+    <div class="container">
+      <button type="button" class="btn btn-primary dropdown-toggle"  id="dropdownMenuButton"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pizzas</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" id="reg_pizza">Regular Pizza</a>
+        <a class="dropdown-item" id="sic_pizza">Sicilian Pizza</a>
+      </div>
+    </div>
+    <div class="container">
+      <button type="button" id="sub_menu" class="btn btn-info">Subs</button>
+    </div>
+    <div class="container">
+      <button type="button" id="salad_menu" class="btn btn-info"> Salad </button>
+    </div>
+    <div class="container">
+      <button type="button" id="pasta_menu" class="btn btn-info"> Pasta </button>
+    </div>
+    <div class="container">
+      <button type="button" id="platter_menu" class="btn btn-info"> Dinner Platter
+      </button>
+    </div>
+    <div class="container">
+      <button type="button" id="special_menu" class="btn btn-warning">Specials
+      </button>
+    </div>
+  </div>
+  <section id="regular_pizza" class="main">
+    <div class="container">
+      <div class="mt-2 mb-2 border-bottom border-top">
+        <h4>Regular Pizza</h4>
+      </div>
+      <div class="row row-cols-1 row-cols-md-2">
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Regular Cheese Pizza<h5>
+              <p class="card-text text-center"> Small Pizza (S) <span class="ml-3 text-muted">$12.70</span>
+                <button class="btn btn-primary ml-3 p-1 pizza" type="button" name="cartbtn">Buy</button></p>
+              <p class="card-text text-center"> Large Pizza (L) <span class="ml-3 text-muted">$17.95</span>
+                <button class="btn btn-primary ml-3 p-1 pizza" type="button" name="cartbtn">Buy</button></p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">1 Topping Regular Pizza<h5>
+              <p class="card-text text-center"> Small Pizza (S) <span class="ml-3 text-muted">$13.70</span>
+                <button class="btn btn-primary ml-3 p-1 pizza1" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+              <p class="card-text text-center"> Large Pizza (L) <span class="ml-3 text-muted">$19.95</span>
+                <button class="btn btn-primary ml-3 p-1 pizza1" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">2 Topping Regular Pizza<h5>
+              <p class="card-text text-center"> Small Pizza (S) <span class="ml-3 text-muted">$15.20</span>
+                <button class="btn btn-primary ml-3 p-1 pizza2" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+              <p class="card-text text-center"> Large Pizza (L) <span class="ml-3 text-muted">$21.95</span>
+                <button class="btn btn-primary ml-3 p-1 pizza2" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">3 Topping Regular Pizza<h5>
+              <p class="card-text text-center"> Small Pizza (S) <span class="ml-3 text-muted">$16.20</span>
+                <button class="btn btn-primary ml-3 p-1 pizza3" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+              <p class="card-text text-center"> Large Pizza (L) <span class="ml-3 text-muted">$23.95</span>
+                <button class="btn btn-primary ml-3 p-1 pizza3" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="sicilian_pizza" class="main">
+    <div class="container">
+      <div class="mt-2 mb-2 border-bottom border-top">
+        <h4>Sicilian Pizza</h4>
+      </div>
+      <div class="row row-cols-1 row-cols-md-2">
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Sicilian Cheese Pizza<h5>
+              <p class="card-text text-center"> Small Pizza (S) <span class="ml-3 text-muted">$24.45</span>
+                <button class="btn btn-primary ml-3 p-1 pizza" type="button" name="cartbtn">Buy</button></p>
+              <p class="card-text text-center"> Large Pizza (L) <span class="ml-3 text-muted">$38.70</span>
+                <button class="btn btn-primary ml-3 p-1 pizza" type="button" name="cartbtn">Buy</button></p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">1 Topping Sicilian Pizza<h5>
+              <p class="card-text text-center"> Small Pizza (S) <span class="ml-3 text-muted">$26.45</span>
+                <button class="btn btn-primary ml-3 p-1 pizza1" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+              <p class="card-text text-center"> Large Pizza (L) <span class="ml-3 text-muted">$40.70</span>
+                <button class="btn btn-primary ml-3 p-1 pizza1" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">2 Toppings Sicilian Pizza<h5>
+              <p class="card-text text-center"> Small Pizza (S) <span class="ml-3 text-muted">$28.45</span>
+                <button class="btn btn-primary ml-3 p-1 pizza2" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+              <p class="card-text text-center"> Large Pizza (L) <span class="ml-3 text-muted">$42.70</span>
+                <button class="btn btn-primary ml-3 p-1 pizza2" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+            </div>
+          </div>
+        </div>
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">3 Toppings Sicilian Pizza<h5>
+              <p class="card-text text-center"> Small Pizza (S) <span class="ml-3 text-muted">$29.45</span>
+                <button class="btn btn-primary ml-3 p-1 pizza3" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+              <p class="card-text text-center"> Large Pizza (L) <span class="ml-3 text-muted">$44.70</span>
+                <button class="btn btn-primary ml-3 p-1 pizza3" type="button"
+                name="cartbtn" data-toggle="modal" data-target="#staticBackdrop"> Buy </button></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="subs" class="main">
+    <div class="mt-2 mb-2 border-bottom border-top">
+      <h4>Subs</h4>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2">
+      {% for sub in subs %}
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"> {{ sub.name }}<h5>
+              <div class="card-text text-center"> {{ sub.size }} <span class="ml-3 text-muted"> ${{ sub.price }}</span>
+                <form action="{% url 'order' %}" class="d-inline" method="post"> {% csrf_token %}
+                  <input type="hidden" name="order" value="{{sub.id}}" >
+                  <input type="hidden" name="nameorder" value="subs">
+                  <button class="btn btn-primary ml-3 p-1" type="submit"> Buy </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+       <div class="col mb-4">
+         <div class="card">
+           <h5 class="card-title"> Extras <h5>
+           {% for extra in subextras %}
+             <div class="card-text text-center"> {{ extra.name }} <span class="ml-3 text-muted">${{ extra.price }}</span>
+               <form action="{% url 'order' %}" class="d-inline" method="post"> {% csrf_token %}
+                 <input type="hidden" name="order" value="{{exta.id}}" >
+                 <input type="hidden" name="nameorder" value="extras">
+                 <button class="btn btn-primary ml-3 p-1" type="submit"> Buy </button>
+               </form>
+               </div>
+           {% endfor %}
+         </div>
+      </div>
+    </div>
+  </section>
+  <section id="salad" class="main">
+    <div class="mt-2 mb-2 border-bottom border-top">
+      <h4>Salads</h4>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2">
+      {% for salad in salads %}
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"> {{ salad.name }}<h5>
+              <div class="card-text text-center"> {{ salad.size }} <span class="ml-3 text-muted">${{ salad.price }}</span>
+                <form action="{% url 'order' %}" class="d-inline" method="post"> {% csrf_token %}
+                  <input type="hidden" name="order" value="{{salad.id}}" >
+                  <input type="hidden" name="nameorder" value="salad">
+                  <button class="btn btn-primary ml-3 p-1" type="submit"> Buy </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  <section id="dinner_platters" class="main">
+    <div class="mt-2 mb-2 border-bottom border-top">
+      <h4>Dinner Platters</h4>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2">
+     {% for platter in dinnerplatters %}
+        <div class="col mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"> {{ platter.name }}<h5>
+              <div class="card-text text-center"> {{ platter.size }} <span class="ml-3 text-muted">${{ platter.price }}</span>
+                <form action="{% url 'order' %}" class="d-inline" method="post"> {% csrf_token %}
+                  <input type="hidden" name="order" value="{{platter.id}}" >
+                  <input type="hidden" name="nameorder" value="platter">
+                  <button class="btn btn-primary ml-3 p-1" type="submit"> Buy </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+  <aside class="sidenavbar">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="text-center">Cart</h2>
+        <div class="container">
+          <div class="row border-bottom border-top">
+            <div class="col-8"><h6>Items</h6></div>
+            <div class="col-4"><h6>$Price</h6></div>
+          </div>
+          {% if order %}
+            {% for orders in order %}
+              {% if orders.sub %}
+                <div class="row p-1 m-1">
+                  <div class="col-8"><p>{{ orders.sub.name }}</p></div>
+                  <div class="col-4"><p>${{ orders.sub.price }}</p></div>
+                </div>
+              {% endif %}
+              {% if orders.salad %}
+                <div class="row p-1 m-1">
+                  <div class="col-8"><p>{{ orders.salad.name }}</p></div>
+                  <div class="col-4"><p>${{ orders.salad.price }}</p></div>
+                </div>
+              {% endif %}
+              {% if orders.dinnerplatter %}
+                <div class="row p-1 m-1">
+                  <div class="col-8"><p>{{ orders.dinnerplatter.name }}</p></div>
+                  <div class="col-4"><p>${{ orders.dinnerplatter.price }}</p></div>
+                </div>
+              {% endif %}
+              {% if orders.pasta %}
+                <div class="row p-1 m-1">
+                  <div class="col-8"><p>{{ orders.pasta.name }}</p></div>
+                  <div class="col-4"><p>${{ orders.pasta.price }}</p></div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <div class="">
+              Empty Cart
+            </div>
+          {% endif %}
+          <div class="row border-bottom pb-3">
+            <div class="col-7"><h6 class="border-top"> Total</h6></div>
+            <div class="col-5"><h6>$ Price</h6></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="button" name="button" class="btn btn-primary form-control text-center"> Proceed to Checkout </button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel"> Toppings </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {% for topping in toppings %}
+            <div class="form-group pl-4">
+              <input class="form-check-input" type="checkbox" id="check-{{ topping.id }}" name="{{ topping.topping }}" value="{{ topping.id }}">
+              <label class="form-check-label" for="check-{{ topping.id }}">{{ topping.topping }}</label>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"> Add </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block javascript %}
+  <script src="{% static 'orders/order.js' %}"></script>
+{% endblock %}

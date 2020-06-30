@@ -1,0 +1,92 @@
+{% extends 'users/base.html' %}
+{% load static %}
+
+{% block content %}
+  <div id="carouselExampleCaptions"  id="carouselExampleInterval" id="carouselExampleFade" class="carousel slide main mt-2 carousel-fade" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-interval="2000">
+        <img src="{% static 'orders\cheesepizza.jpg' %}" class="d-block w-100 pics" alt="Regular Cheese Pizza">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Regular Cheese Pizza</h5>
+          <p>Order our regular cheese pizza at $12.70</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-interval="2000">
+        <img src="{% static 'orders\siciliancheesepizza.jpg' %}" class="d-block w-100 pics" alt="Sicilian Cheese Pizza">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Sicilian Cheese Pizza</h5>
+          <p>Order our regular cheese pizza at $24.45</p>
+        </div>
+      </div>
+      <div class="carousel-item" data-interval="2000">
+        <img src="{% static 'orders\pizz.jpg' %}" class="d-block w-100 pics" alt="Regular Pizza">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Special Pizza</h5>
+          <p>Nick's Pizza in different sizes and variety</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+  <div class="main card">
+    <div class="card-body">
+      <div class="border-bottom border-top pt-2 pb-2">
+        <h3>What our Customers Say About US</h3>
+      </div>
+      {% if review %}
+        {% for reviews in review %}
+          <div class="list-group mt-3">
+            <div class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{reviews.author}}</h5>
+                <small>{{reviews.date}}</small>
+              </div>
+                <p class="mb-1">{{reviews.rating}} out of 5 rating: -- {{reviews.review}}</p>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        Reviews would go here
+      {% endif %}
+      <form method="post" action="{% url 'index' %}" class="mt-3">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-3"> Submit a Review!</legend>
+          <div class="rating-box">
+            <div class="rating-container">
+              <input type="radio" name="range" value="5" id="star-5"> <label for="star-5">&#9733;</label>
+
+              <input type="radio" name="range" value="4" id="star-4"> <label for="star-4">&#9733;</label>
+
+              <input type="radio" name="range" value="3" id="star-3"> <label for="star-3">&#9733;</label>
+
+              <input type="radio" name="range" value="2" id="star-2"> <label for="star-2">&#9733;</label>
+
+              <input type="radio" name="range" value="1" id="star-1"> <label for="star-1">&#9733;</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="textarea" rows="8" cols="80"></textarea>
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit" name="button">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
